@@ -26,7 +26,7 @@ public class GitHubUITests extends BaseTest {
 
     public final static String BASE_URL = "https://github.com";
     private final static String REPOSITORY = "nastiykr/qa_guru_5_5_allure_reports";
-    private final static String TAB = "Issue";
+    private final static String TAB = "Issues";
 
     GitHubPage gitHubPage = new GitHubPage();
 
@@ -39,7 +39,7 @@ public class GitHubUITests extends BaseTest {
     @Feature("Поиск")
     @Tags({@Tag("critical"), @Tag("web")})
     @DisplayName("Поиск репозитория через поисковую строку")
-      void searchRepo() {
+    void searchRepo() {
         gitHubPage.openPage(BASE_URL)
                 .search(REPOSITORY);
     }
@@ -57,7 +57,7 @@ public class GitHubUITests extends BaseTest {
         gitHubPage.openPage(BASE_URL)
                 .search(REPOSITORY)
                 .goToRepository(REPOSITORY)
-                .checkData(TAB);
+                .checkOpenedIssue(TAB);
     }
 
     @Test
@@ -87,12 +87,11 @@ public class GitHubUITests extends BaseTest {
     @Component("UI")
     @Feature("Разделы на сайте")
     @Tags({@Tag("web")})
-    @DisplayName("Открытие вкладки features")
+    @DisplayName("Открытие вкладки team")
     void openTabFeature() {
         gitHubPage.openPage(BASE_URL)
-                .search(REPOSITORY)
-                .goToRepository(REPOSITORY)
-                .checkData(TAB);
+                .clickOpenTeamPage()
+                .checkOpenedTeamPage();
     }
 
     @Test
@@ -106,8 +105,8 @@ public class GitHubUITests extends BaseTest {
     @DisplayName("Открытие страницы shop")
     void openShopPage() {
         gitHubPage.openPage(BASE_URL)
-                .search(REPOSITORY)
-                .goToRepository(REPOSITORY)
-                .checkData(TAB);
+                .clickOpenShopPage()
+                .clickButtonShop()
+                .checkOpenedShopPage();
     }
 }
